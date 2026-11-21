@@ -1,5 +1,6 @@
 import Button from '../ui/Button';
 import styled from "styled-components";
+import { device } from "../styles/breakpoints";
 
 import { useMoveBack } from "../hooks/useMoveBack";
 import Heading from "../ui/Heading";
@@ -10,7 +11,7 @@ const StyledPageNotFound = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4.8rem;
+  padding: 4.8rem clamp(1.6rem, 4vw, 4.8rem);
 `;
 
 const Box = styled.div`
@@ -21,6 +22,10 @@ const Box = styled.div`
 
   padding: 4.8rem;
   flex: 0 1 96rem;
+
+  @media ${device.mobile} {
+    padding: 3.2rem 1.6rem;
+  }
   text-align: center;
 
   & h1 {

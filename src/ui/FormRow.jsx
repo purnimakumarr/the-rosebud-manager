@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { device } from '../styles/breakpoints';
+
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -23,7 +25,26 @@ const StyledFormRow = styled.div`
   &:has(button) {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 1.2rem;
+  }
+
+  @media ${device.tablet} {
+    grid-template-columns: 18rem 1fr;
+
+    /* Error message moves under the input */
+    & > span {
+      grid-column: 2;
+    }
+  }
+
+  @media ${device.mobile} {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.8rem;
+
+    & > span {
+      grid-column: auto;
+    }
   }
 `;
 

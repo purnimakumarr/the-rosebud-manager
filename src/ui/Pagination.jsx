@@ -3,12 +3,16 @@ import { useSearchParams } from 'react-router';
 import styled from 'styled-components';
 import { getPageParam } from '../utils/helpers';
 import { PAGE_SIZE } from '../utils/constants';
+import { device } from '../styles/breakpoints';
+
 
 const StyledPagination = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
 `;
 
 const P = styled.p`
@@ -52,6 +56,14 @@ const PaginationButton = styled.button`
   & svg {
     height: 1.8rem;
     width: 1.8rem;
+  }
+
+  @media ${device.small} {
+    padding: 0.6rem;
+
+    & span {
+      display: none;
+    }
   }
 
   &:hover:not(:disabled) {

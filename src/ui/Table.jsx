@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { Children, createContext, useContext } from 'react';
 import styled from 'styled-components';
 
 const StyledTable = styled.div`
@@ -9,6 +9,16 @@ const StyledTable = styled.div`
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+`;
+
+/* Header + rows scroll sideways on narrow screens instead of squashing columns */
+const ScrollArea = styled.div`
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+`;
+
+const Inner = styled.div`
+  min-width: ${(props) => props.$minWidth};
 `;
 
 const CommonRow = styled.div`
@@ -68,10 +78,21 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-function Table({ columns, children }) {
+// minWidth: width below which the table scrolls horizontally
+function Table({ columns, minWidth = '64rem', children }) {
+  // Keep the footer (pagination) outside the scroll area so it stays visible
+  const all = Children.toArray(children);
+  const footers = all.filter((child) => child.type === Footer);
+  const rest = all.filter((child) => child.type !== Footer);
+
   return (
     <TableContext.Provider value={{ columns }}>
-      <StyledTable role='table'>{children}</StyledTable>
+      <StyledTable role='table'>
+        <ScrollArea>
+          <Inner $minWidth={minWidth}>{rest}</Inner>
+        </ScrollArea>
+        {footers}
+      </StyledTable>
     </TableContext.Provider>
   );
 }
