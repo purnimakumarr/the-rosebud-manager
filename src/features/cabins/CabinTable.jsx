@@ -33,7 +33,7 @@ function CabinTable() {
 
   return (
     <Menus>
-      <Table columns='0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>
+      <Table columns='0.6fr 1.8fr 2.2fr 1fr 1fr 1fr' minWidth='68rem'>
         <Table.Header role='row'>
           <div></div>
           <div>Room</div>

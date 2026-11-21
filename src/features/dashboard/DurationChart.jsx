@@ -7,8 +7,10 @@ import {
   Tooltip,
 } from 'recharts';
 import styled from 'styled-components';
+import { device } from '../../styles/breakpoints';
 import Heading from '../../ui/Heading';
 import { useDarkMode } from '../../context/DarkModeContext';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 const ChartBox = styled.div`
   /* Box */
@@ -18,6 +20,15 @@ const ChartBox = styled.div`
 
   padding: 2.4rem 3.2rem;
   grid-column: 3 / span 2;
+  min-width: 0;
+
+  @media ${device.laptop} {
+    grid-column: 1 / -1;
+  }
+
+  @media ${device.mobile} {
+    padding: 2rem 1.6rem;
+  }
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -145,31 +156,33 @@ const CustomPieShape = (props) => {
 
 function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
+  // On phones: smaller ring, legend underneath instead of beside it
+  const isSmall = useMediaQuery(device.small);
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
 
   return (
     <ChartBox>
       <Heading as='h2'>Stay Duration Summary</Heading>
-      <ResponsiveContainer width={'100%'} height={240}>
+      <ResponsiveContainer width={'100%'} height={isSmall ? 320 : 240}>
         <PieChart>
           <Pie
             data={data}
             nameKey='duration'
             dataKey='value'
-            innerRadius={85}
-            outerRadius={110}
-            cx='40%'
-            cy='50%'
+            innerRadius={isSmall ? 60 : 85}
+            outerRadius={isSmall ? 80 : 110}
+            cx={isSmall ? '50%' : '40%'}
+            cy={isSmall ? '40%' : '50%'}
             paddingAngle={3}
             shape={CustomPieShape}
           />
           <Tooltip />
           <Legend
-            verticalAlign='middle'
-            align='right'
-            width='30%'
-            layout='vertical'
+            verticalAlign={isSmall ? 'bottom' : 'middle'}
+            align={isSmall ? 'center' : 'right'}
+            width={isSmall ? undefined : '30%'}
+            layout={isSmall ? 'horizontal' : 'vertical'}
             iconSize={15}
             iconType='circle'
           />

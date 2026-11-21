@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from '../../styles/breakpoints';
 import { format, isToday } from "date-fns";
 import {
   HiOutlineChatBubbleBottomCenterText,
@@ -24,6 +25,13 @@ const StyledBookingDataBox = styled.section`
 const Header = styled.header`
   background-color: var(--color-brand-500);
   padding: 2rem 4rem;
+  flex-wrap: wrap;
+  gap: 0.8rem 2.4rem;
+
+  @media ${device.mobile} {
+    padding: 1.6rem;
+    font-size: 1.5rem;
+  }
   color: var(--color-on-brand);
   font-size: 1.8rem;
   font-weight: 500;
@@ -54,12 +62,17 @@ const Header = styled.header`
 
 const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
+
+  @media ${device.mobile} {
+    padding: 2rem 1.6rem 1.2rem;
+  }
 `;
 
 const Guest = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
 
@@ -73,7 +86,13 @@ const Price = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
   padding: 1.6rem 3.2rem;
+
+  @media ${device.mobile} {
+    padding: 1.6rem;
+  }
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
 
@@ -98,6 +117,10 @@ const Price = styled.div`
 const Footer = styled.footer`
   padding: 1.6rem 4rem;
   font-size: 1.2rem;
+
+  @media ${device.mobile} {
+    padding: 1.6rem;
+  }
   color: var(--color-grey-500);
   text-align: right;
 `;

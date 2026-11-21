@@ -59,9 +59,14 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-function MainNav() {
+function MainNav({ onNavigate }) {
+  // Close the mobile drawer whenever a link is chosen
+  function handleClick(e) {
+    if (e.target.closest('a')) onNavigate?.();
+  }
+
   return (
-    <nav>
+    <nav onClick={handleClick}>
       <NavList>
         <li>
           <StyledNavLink to='/dashboard'>

@@ -9,7 +9,7 @@ const StyledErrorFallback = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4.8rem;
+  padding: clamp(2.4rem, 5vw, 4.8rem) clamp(1.6rem, 4vw, 4.8rem);
 `;
 
 const Box = styled.div`
@@ -18,7 +18,7 @@ const Box = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-lg);
 
-  padding: 4.8rem;
+  padding: clamp(2.4rem, 5vw, 4.8rem) clamp(1.6rem, 4vw, 4.8rem);
   flex: 0 1 96rem;
   text-align: center;
 

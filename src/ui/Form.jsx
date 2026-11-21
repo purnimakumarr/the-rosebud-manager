@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import { device } from '../styles/breakpoints';
+
 
 const Form = styled.form`
   ${(props) =>
@@ -10,12 +12,16 @@ const Form = styled.form`
       background-color: var(--color-grey-0);
       border: 1px solid var(--color-grey-100);
       border-radius: var(--border-radius-lg);
+
+      @media ${device.mobile} {
+        padding: 2rem 1.6rem;
+      }
     `}
 
   ${(props) =>
     props.type === 'modal' &&
     css`
-      width: 80rem;
+      width: min(80rem, 100%);
     `}
     
   overflow: hidden;

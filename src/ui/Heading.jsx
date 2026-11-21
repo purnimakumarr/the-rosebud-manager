@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { device } from '../styles/breakpoints';
 
 const display = css`
   font-family: var(--font-display);
@@ -6,6 +7,8 @@ const display = css`
   letter-spacing: 0.03em;
   line-height: 1.1;
   color: var(--color-grey-900);
+  /* Display caps read badly when hyphenated ("EX-IST") */
+  hyphens: manual;
 `;
 
 const Heading = styled.h1`
@@ -14,6 +17,10 @@ const Heading = styled.h1`
     css`
       ${display}
       font-size: 4rem;
+
+      @media ${device.mobile} {
+        font-size: 3.2rem;
+      }
     `};
 
   ${(props) =>
@@ -21,6 +28,10 @@ const Heading = styled.h1`
     css`
       ${display}
       font-size: 2.8rem;
+
+      @media ${device.mobile} {
+        font-size: 2.4rem;
+      }
     `};
 
   ${(props) =>
@@ -36,6 +47,10 @@ const Heading = styled.h1`
       ${display}
       font-size: 4rem;
       text-align: center;
+
+      @media ${device.mobile} {
+        font-size: 3.2rem;
+      }
     `};
 `;
 

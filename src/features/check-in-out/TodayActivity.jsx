@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/breakpoints';
 
 import Heading from '../../ui/Heading';
 import Row from '../../ui/Row';
@@ -18,9 +19,20 @@ const StyledToday = styled.div`
   gap: 2.4rem;
   grid-column: 1 / span 2;
   padding-top: 2.4rem;
+  min-height: 0;
+
+  @media ${device.laptop} {
+    grid-column: 1 / -1;
+    max-height: 40rem;
+  }
+
+  @media ${device.mobile} {
+    padding: 2rem 1.6rem;
+  }
 `;
 
 const TodayList = styled.ul`
+  min-height: 0;
   overflow: scroll;
   overflow-x: hidden;
 

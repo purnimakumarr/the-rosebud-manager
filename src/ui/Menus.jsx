@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { HiEllipsisVertical } from 'react-icons/hi2';
 import styled from 'styled-components';
@@ -37,6 +37,7 @@ const StyledList = styled.ul`
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
+  z-index: 1000;
 
   right: ${(props) => props.position.x}px;
   top: ${(props) => props.position.y}px;
@@ -109,8 +110,24 @@ function Toggle({ id }) {
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
   const ref = useOutsideClick(close, false);
+  const isOpen = openId === id;
 
-  if (openId !== id) return null;
+  // The list is fixed to the viewport, so close it rather than let it drift
+  // away from its row when the page or table scrolls, or the screen rotates.
+  useEffect(
+    function () {
+      if (!isOpen) return;
+      window.addEventListener('scroll', close, true);
+      window.addEventListener('resize', close);
+      return () => {
+        window.removeEventListener('scroll', close, true);
+        window.removeEventListener('resize', close);
+      };
+    },
+    [isOpen, close],
+  );
+
+  if (!isOpen) return null;
 
   return createPortal(
     <StyledList position={{ x: position.x, y: position.y }} ref={ref}>

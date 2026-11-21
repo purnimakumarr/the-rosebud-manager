@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/breakpoints';
 import BookingDataBox from '../../features/bookings/BookingDataBox';
 
 import Row from '../../ui/Row';
@@ -22,6 +23,10 @@ const Box = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-lg);
   padding: 2.4rem 4rem;
+
+  @media ${device.mobile} {
+    padding: 1.6rem;
+  }
 `;
 
 function CheckinBooking() {

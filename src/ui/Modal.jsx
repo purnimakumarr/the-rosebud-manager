@@ -4,6 +4,8 @@ import { HiXMark } from 'react-icons/hi2';
 import styled from 'styled-components';
 import { cloneElement } from 'react';
 import { useOutsideClick } from '../hooks/useOutsideClick';
+import { device } from '../styles/breakpoints';
+
 
 const StyledModal = styled.div`
   position: fixed;
@@ -16,6 +18,16 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
+  max-width: calc(100vw - 3.2rem);
+  max-height: calc(100dvh - 3.2rem);
+  overflow-y: auto;
+
+  @media ${device.mobile} {
+    width: calc(100vw - 2.4rem);
+    max-width: none;
+    padding: 4.8rem 1.6rem 2.4rem;
+    border-radius: var(--border-radius-lg);
+  }
 `;
 
 const Overlay = styled.div`
